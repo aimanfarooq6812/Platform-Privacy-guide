@@ -1,20 +1,25 @@
 """
-Content for the Privacy & Account Control guide.
+Content for Trapdoor — the privacy and account control guide.
 
 Each platform:
     slug    -> used for the sidebar anchor link (#instagram)
     groups  -> sections shown inside the platform dropdown
     items   -> one dropdown each: what it does (1 line) + how to get there
 
-`how` is a list of routes. Write a route as "Step → Step → Step".
-Add a label with a pipe: "On iPhone|Settings → Support → ...".
+`how` is a list of routes. Write a route as "Step -> Step -> Step" using the
+arrow character. Add a device or context label with a pipe:
+    "On iPhone|Settings -> Support -> ...".
+
+LAST_REVIEWED is shown at the bottom of the page. Update it whenever you do
+a pass over these paths.
 """
+
+LAST_REVIEWED = "September 2026"
 
 PLATFORMS = [
     # ------------------------------------------------------------------ #
     {
         "name": "Instagram",
-        "emoji": "📸",
         "slug": "instagram",
         "section": "Social media & messaging",
         "groups": [
@@ -25,16 +30,17 @@ PLATFORMS = [
                         "name": "Log out",
                         "tag": "This device",
                         "what": "Signs you out on this device only — your account and posts stay exactly as they are.",
-                        "how": ["Profile picture (bottom right) → ☰ (top right) → scroll down → Log out"],
+                        "how": ["Profile picture (bottom right) → menu (top right) → scroll down → Log out"],
                     },
                     {
                         "name": "Deactivate account",
                         "tag": "Reversible",
                         "what": "Hides your profile, photos and comments from everyone until you log back in.",
                         "how": [
-                            "Settings and privacy → Accounts Centre → Personal details → Account ownership and control → Deactivation or deletion → pick your account → Deactivate account → confirm with password"
+                            "If you see Personal details|Settings and privacy → Accounts Centre → Personal details → Account ownership and control → Deactivation or deletion → pick your account → Deactivate account → confirm with password",
+                            "If you see Manage accounts|Settings and privacy → Accounts Centre → Manage accounts → Manage next to your profile → Deactivation or deletion → pick your account → Deactivate account → confirm with password",
                         ],
-                        "note": "No time limit — you can stay deactivated as long as you like.",
+                        "note": "Meta has shipped two versions of this menu, so check which one your screen shows. No time limit on staying deactivated, but Instagram only lets you deactivate once every 7 days.",
                     },
                     {
                         "name": "Delete account",
@@ -43,7 +49,7 @@ PLATFORMS = [
                         "how": [
                             "Same path as Deactivate → Delete account → pick a reason → enter password → confirm"
                         ],
-                        "note": "You get 30 days first. Logging back in during that window cancels the deletion.",
+                        "note": "Usually 30 days to change your mind, though Meta says the exact window varies by region. Logging back in during it cancels the deletion. Download your data first — the export tool stops working once deletion starts.",
                     },
                 ],
             },
@@ -53,7 +59,7 @@ PLATFORMS = [
                     {
                         "name": "Private account",
                         "what": "Only followers you approve can see your posts, photos and stories.",
-                        "how": ["Settings and privacy → Privacy → turn on Private account"],
+                        "how": ["Settings and privacy → Account privacy → turn on Private account"],
                     },
                     {
                         "name": "Activity status",
@@ -68,12 +74,7 @@ PLATFORMS = [
                     {
                         "name": "Restrict someone",
                         "what": "Limits a person without blocking them — their comments only show to them, and they are never told.",
-                        "how": ["Their profile → ⋮ → Restrict"],
-                    },
-                    {
-                        "name": "Active together visibility",
-                        "what": "Hides whether you are online inside a shared DM thread, even if your activity status is on.",
-                        "how": ["Settings and privacy → Messages and story replies → turn off Active together"],
+                        "how": ["Their profile → options (three dots) → Restrict"],
                     },
                     {
                         "name": "Hide story from",
@@ -83,8 +84,8 @@ PLATFORMS = [
                     {
                         "name": "Limits",
                         "what": "Automatically hides comments and DM requests from accounts that don't follow you.",
-                        "how": ["Settings and privacy → Privacy → Limits → turn on"],
-                        "note": "Useful during a wave of harassment when you don't want to block people one by one.",
+                        "how": ["Settings and privacy → Limited interactions → turn on"],
+                        "note": "Built for a wave of harassment, when blocking people one by one isn't fast enough.",
                     },
                     {
                         "name": "Manual tag approval",
@@ -94,7 +95,12 @@ PLATFORMS = [
                     {
                         "name": "Mute without unfollowing",
                         "what": "Stops someone's posts or stories reaching your feed without unfollowing or telling them.",
-                        "how": ["Their profile → ⋮ → Mute"],
+                        "how": ["Their profile → options (three dots) → Mute"],
+                    },
+                    {
+                        "name": "Who can message and add you to groups",
+                        "what": "Stops strangers starting a DM thread or pulling you into a group chat.",
+                        "how": ["Settings and privacy → Messages and story replies → set each category"],
                     },
                 ],
             },
@@ -103,7 +109,6 @@ PLATFORMS = [
     # ------------------------------------------------------------------ #
     {
         "name": "Facebook",
-        "emoji": "🟦",
         "slug": "facebook",
         "section": "Social media & messaging",
         "groups": [
@@ -114,7 +119,7 @@ PLATFORMS = [
                         "name": "Log out",
                         "tag": "This device",
                         "what": "Signs you out on this device only.",
-                        "how": ["Menu (☰) → scroll to the bottom → Log out"],
+                        "how": ["Menu → scroll to the bottom → Log out"],
                     },
                     {
                         "name": "Deactivate account",
@@ -123,7 +128,7 @@ PLATFORMS = [
                         "how": [
                             "Settings & privacy → Accounts Centre → Personal details → Account ownership and control → Deactivation or deletion → pick account → Deactivate"
                         ],
-                        "note": "Logging back in reactivates you instantly.",
+                        "note": "Logging back in reactivates you instantly. If your Accounts Centre shows Manage accounts instead of Personal details, go through that and then Deactivation or deletion.",
                     },
                     {
                         "name": "Delete account",
@@ -184,7 +189,6 @@ PLATFORMS = [
     # ------------------------------------------------------------------ #
     {
         "name": "Snapchat",
-        "emoji": "👻",
         "slug": "snapchat",
         "section": "Social media & messaging",
         "groups": [
@@ -195,21 +199,21 @@ PLATFORMS = [
                         "name": "Log out",
                         "tag": "This device",
                         "what": "Signs you out on this device only.",
-                        "how": ["Profile (Bitmoji, top left) → gear icon → scroll down → Log out"],
+                        "how": ["Profile (top left) → gear icon → scroll down → Log out"],
                     },
                     {
                         "name": "Deactivate account",
                         "tag": "Reversible",
                         "what": "There's no separate pause button — starting deletion triggers a 30-day hold that works the same way.",
                         "how": ["Use the Delete account steps — the hold starts automatically"],
-                        "note": "The hold is 180 days in India. Log back in during the window to restore everything.",
+                        "note": "The hold is longer in some regions. Log back in during the window to restore everything.",
                     },
                     {
                         "name": "Delete account",
                         "tag": "Permanent",
                         "what": "Erases your profile, Snap Map presence and account data.",
                         "how": [
-                            "On Android or desktop|accounts.snapchat.com/accounts/delete_account → log in → Delete My Account → re-enter your details → confirm",
+                            "On Android or desktop|accounts.snapchat.com → log in → Delete My Account → re-enter your details → confirm",
                             "On iPhone|Settings (gear) → Support → I Need Help → My Account & Security → Account Information → Delete My Account",
                         ],
                     },
@@ -223,6 +227,11 @@ PLATFORMS = [
                         "what": "Removes your avatar from the Snap Map so no other user can see where you are.",
                         "how": ["Snap Map → gear icon (top right of the map) → turn on Ghost Mode → choose how long"],
                         "note": "Ghost Mode hides you from other users only — Snapchat keeps collecting your location.",
+                    },
+                    {
+                        "name": "Who can contact you",
+                        "what": "Limits who can send you snaps and chats to friends only, instead of everyone.",
+                        "how": ["Settings → Privacy Controls → Contact Me → My Friends"],
                     },
                 ],
             },
@@ -242,12 +251,17 @@ PLATFORMS = [
                     {
                         "name": "Hide story from",
                         "what": "Blocks specific people from seeing your story without unfriending them.",
-                        "how": ["Settings → Who can view my story → Hide my story from"],
+                        "how": ["Settings → Privacy Controls → View My Story → Custom → pick who to block"],
                     },
                     {
                         "name": "Contact syncing",
                         "what": "Stops Snapchat matching your phone contacts against its user database to suggest friends.",
                         "how": ["Settings → Contacts → turn off syncing"],
+                    },
+                    {
+                        "name": "My AI data",
+                        "what": "Clears what Snapchat's built-in chatbot has stored from your conversations with it.",
+                        "how": ["Settings → Privacy Controls → Clear Data → Clear My AI Data"],
                     },
                 ],
             },
@@ -256,7 +270,6 @@ PLATFORMS = [
     # ------------------------------------------------------------------ #
     {
         "name": "Discord",
-        "emoji": "🎮",
         "slug": "discord",
         "section": "Social media & messaging",
         "groups": [
@@ -292,7 +305,7 @@ PLATFORMS = [
                     {
                         "name": "DM restrictions",
                         "what": "Decides whether people who share a server with you, but aren't friends, can message you.",
-                        "how": ["User Settings → Privacy & Safety (or Content & Social) → turn off direct messages from server members"],
+                        "how": ["User Settings → Content & Social (previously Privacy & Safety) → turn off direct messages from server members"],
                     },
                     {
                         "name": "Activity privacy",
@@ -313,17 +326,22 @@ PLATFORMS = [
                     {
                         "name": "Safe direct messaging",
                         "what": "Scans incoming DMs for explicit images before you have to look at them.",
-                        "how": ["User Settings → Privacy & Safety"],
+                        "how": ["User Settings → Content & Social → Sensitive content filters"],
                     },
                     {
                         "name": "Who can add you as a friend",
                         "what": "Limits friend requests to everyone, friends of friends, server members or no one.",
-                        "how": ["User Settings → Privacy & Safety → Friend Requests"],
+                        "how": ["User Settings → Content & Social → Friend Requests"],
                     },
                     {
                         "name": "Request all of my data",
                         "what": "Downloads a full archive of everything Discord has stored about you.",
                         "how": ["User Settings → Data & Privacy → Request all of my data"],
+                    },
+                    {
+                        "name": "Ignore someone",
+                        "what": "A quieter alternative to blocking — you stop seeing them, and they aren't told.",
+                        "how": ["Their profile → options (three dots) → Ignore"],
                     },
                 ],
             },
@@ -332,7 +350,6 @@ PLATFORMS = [
     # ------------------------------------------------------------------ #
     {
         "name": "TikTok",
-        "emoji": "🎵",
         "slug": "tiktok",
         "section": "Social media & messaging",
         "groups": [
@@ -343,7 +360,7 @@ PLATFORMS = [
                         "name": "Log out",
                         "tag": "This device",
                         "what": "Signs you out on this device only.",
-                        "how": ["Profile → ☰ (top right) → Settings and privacy → scroll down → Log out"],
+                        "how": ["Profile → menu (top right) → Settings and privacy → scroll down → Log out"],
                     },
                     {
                         "name": "Deactivate account",
@@ -383,7 +400,18 @@ PLATFORMS = [
                     {
                         "name": "Comment keyword filters",
                         "what": "Hides comments containing words you choose — up to 100 — before you ever see them.",
-                        "how": ["Settings and privacy → Privacy → Comment filters → Filter keywords"],
+                        "how": ["Settings and privacy → Privacy → Comments → Filter keywords"],
+                    },
+                    {
+                        "name": "Reuse of content",
+                        "what": "Stops other people adding your posts to their Stories or reusing your sounds and clips.",
+                        "how": ["Settings and privacy → Privacy → Reuse of content"],
+                        "note": "Only appears if your account is public — a private account blocks this by default.",
+                    },
+                    {
+                        "name": "Video downloads",
+                        "what": "Stops anyone saving your videos to their phone from the share menu.",
+                        "how": ["Settings and privacy → Privacy → Downloads → turn off"],
                     },
                     {
                         "name": "Profile view history",
@@ -412,7 +440,6 @@ PLATFORMS = [
     # ------------------------------------------------------------------ #
     {
         "name": "X (Twitter)",
-        "emoji": "❌",
         "slug": "x-twitter",
         "section": "Social media & messaging",
         "groups": [
@@ -447,7 +474,7 @@ PLATFORMS = [
                     {
                         "name": "Protect your posts",
                         "what": "Makes your account private so only approved followers see your posts.",
-                        "how": ["Settings and privacy → Privacy and safety → Audience and tagging → Protect your posts"],
+                        "how": ["Settings and privacy → Privacy and safety → Audience, media and tagging → Protect your posts"],
                     },
                 ],
             },
@@ -475,9 +502,17 @@ PLATFORMS = [
                         "how": ["Settings and privacy → Privacy and safety → Direct Messages"],
                     },
                     {
-                        "name": "Data sharing with business partners",
-                        "what": "Stops your activity data being shared with X's advertising and business partners.",
-                        "how": ["Settings and privacy → Privacy and safety → Data sharing with business partners"],
+                        "name": "Photo tagging",
+                        "what": "Stops strangers tagging you in photos, which pushes your account into their replies.",
+                        "how": ["Settings and privacy → Privacy and safety → Audience, media and tagging → Photo tagging"],
+                    },
+                    {
+                        "name": "Data sharing and Grok training",
+                        "what": "Stops your posts and activity being used for ad partners and for training X's AI model.",
+                        "how": [
+                            "Settings and privacy → Privacy and safety → Data sharing and personalisation",
+                            "For the AI model|Settings and privacy → Privacy and safety → Grok → turn off data sharing",
+                        ],
                     },
                 ],
             },
@@ -486,7 +521,6 @@ PLATFORMS = [
     # ------------------------------------------------------------------ #
     {
         "name": "WhatsApp",
-        "emoji": "💬",
         "slug": "whatsapp",
         "section": "Social media & messaging",
         "groups": [
@@ -530,11 +564,35 @@ PLATFORMS = [
                         "what": "Decides who can see your profile picture and your About text.",
                         "how": ["Settings → Privacy"],
                     },
+                    {
+                        "name": "Two-step verification",
+                        "what": "A six-digit PIN needed to register your number on a new device — the single best defence against a stolen account.",
+                        "how": ["Settings → Account → Two-step verification → Turn on → set a PIN and add your email"],
+                        "note": "Nobody will ever legitimately ask you for this PIN or for the code WhatsApp texts you. That request is always a scam.",
+                    },
                 ],
             },
             {
                 "title": "Hidden settings",
                 "items": [
+                    {
+                        "name": "Advanced Chat Privacy",
+                        "what": "Per-chat switch that blocks others exporting the chat, auto-saving its media, and using the messages for AI features.",
+                        "how": ["Open the chat → tap the chat or group name → Advanced Chat Privacy → turn on"],
+                        "note": "Added in 2025 and expanded since. It does not stop screenshots, and in a group any admin can switch it back off.",
+                    },
+                    {
+                        "name": "Strict account settings",
+                        "what": "A lockdown mode that forces your privacy settings to contacts-only and limits what people outside your contacts can do.",
+                        "how": ["Settings → Privacy → Advanced → turn on Strict account settings"],
+                        "note": "Rolled out in 2026, aimed at people at higher risk of targeted attacks. It trades some convenience for a much smaller attack surface.",
+                    },
+                    {
+                        "name": "Username and username key",
+                        "what": "Lets people reach you by username instead of your phone number, with an optional key so only people who have both can start a chat.",
+                        "how": ["Settings → Profile → Username"],
+                        "note": "Rolling out through 2026, so it may not have reached your account yet. Worth checking if you'd rather not hand out your number.",
+                    },
                     {
                         "name": "Chat lock",
                         "what": "Puts one chat behind a fingerprint, Face ID or PIN and keeps it out of notification previews.",
@@ -544,6 +602,11 @@ PLATFORMS = [
                         "name": "Protect IP address in calls",
                         "what": "Routes calls through WhatsApp's servers so the other person can't see your IP or rough location.",
                         "how": ["Settings → Privacy → Advanced → Protect IP address in calls"],
+                    },
+                    {
+                        "name": "Silence unknown callers",
+                        "what": "Stops calls from numbers not in your contacts from ringing — they still appear in your call list.",
+                        "how": ["Settings → Privacy → Calls → Silence unknown callers"],
                     },
                     {
                         "name": "Disable link previews",
@@ -560,6 +623,11 @@ PLATFORMS = [
                         "what": "Stops others seeing when you've read their messages — you also stop seeing theirs.",
                         "how": ["Settings → Privacy → turn off Read receipts"],
                     },
+                    {
+                        "name": "Who can add you to groups",
+                        "what": "Stops strangers pulling you into group chats without asking.",
+                        "how": ["Settings → Privacy → Groups → My contacts or My contacts except..."],
+                    },
                 ],
             },
         ],
@@ -567,7 +635,6 @@ PLATFORMS = [
     # ------------------------------------------------------------------ #
     {
         "name": "Telegram",
-        "emoji": "✈️",
         "slug": "telegram",
         "section": "Social media & messaging",
         "groups": [
@@ -614,7 +681,7 @@ PLATFORMS = [
                         "name": "Secret chats",
                         "what": "A fully end-to-end encrypted chat stored only on your devices, with messages that self-destruct.",
                         "how": ["Open a chat → tap the contact's name → Start Secret Chat"],
-                        "note": "Self-destruct timers run from 2 seconds to 1 week, and messages can't be forwarded.",
+                        "note": "Normal Telegram chats are not end-to-end encrypted — only secret chats are. Timers run from 2 seconds to 1 week, and messages can't be forwarded.",
                     },
                     {
                         "name": "Who can add me to groups",
@@ -638,7 +705,6 @@ PLATFORMS = [
     # ------------------------------------------------------------------ #
     {
         "name": "Reddit",
-        "emoji": "👽",
         "slug": "reddit",
         "section": "Social media & messaging",
         "groups": [
@@ -661,7 +727,7 @@ PLATFORMS = [
                         "name": "Delete account",
                         "tag": "Permanent",
                         "what": "Immediate and permanent, with no grace period or undo window.",
-                        "how": ["User Settings → Account → Delete Account → confirm with password"],
+                        "how": ["Settings → Account → Delete Account → confirm with password"],
                         "note": "Your posts and comments stay up as '[deleted]' unless you remove them yourself first.",
                     },
                 ],
@@ -672,7 +738,7 @@ PLATFORMS = [
                     {
                         "name": "Safety & Privacy tab",
                         "what": "The central hub for most of Reddit's visibility controls.",
-                        "how": ["User Settings → Safety & Privacy"],
+                        "how": ["Settings → Safety & Privacy"],
                     },
                 ],
             },
@@ -692,12 +758,12 @@ PLATFORMS = [
                     {
                         "name": "Active in communities",
                         "what": "Hides which subreddits you're active in from your public profile.",
-                        "how": ["Profile → Settings → turn off Show active communities"],
+                        "how": ["Settings → Safety & Privacy → turn off Show active communities"],
                     },
                     {
                         "name": "Personalised ads",
                         "what": "Turns off ad targeting based on your browsing and posting.",
-                        "how": ["Settings → Privacy & Ad Settings"],
+                        "how": ["Settings → Privacy → Ad personalisation"],
                     },
                 ],
             },
@@ -706,7 +772,6 @@ PLATFORMS = [
     # ------------------------------------------------------------------ #
     {
         "name": "YouTube",
-        "emoji": "▶️",
         "slug": "youtube",
         "section": "Social media & messaging",
         "groups": [
@@ -780,7 +845,6 @@ PLATFORMS = [
     # ------------------------------------------------------------------ #
     {
         "name": "LinkedIn",
-        "emoji": "💼",
         "slug": "linkedin",
         "section": "Social media & messaging",
         "groups": [
@@ -797,7 +861,7 @@ PLATFORMS = [
                         "name": "Hibernate account",
                         "tag": "Reversible",
                         "what": "LinkedIn's version of deactivating — hides your profile while keeping connections, messages and posts.",
-                        "how": ["Settings & Privacy → Account preferences → Hibernate account"],
+                        "how": ["Settings & Privacy → Account preferences → Account management → Hibernate account"],
                         "note": "This cancels any Premium subscription straight away — cancel it separately first if you've paid ahead.",
                     },
                     {
@@ -807,7 +871,7 @@ PLATFORMS = [
                         "how": [
                             "Settings & Privacy → Account preferences → Account management → Close account → pick a reason → confirm password"
                         ],
-                        "note": "14-day grace period before it's final.",
+                        "note": "Short grace period before it's final, then your data is gone.",
                     },
                 ],
             },
@@ -833,12 +897,18 @@ PLATFORMS = [
                     {
                         "name": "Open to work visibility",
                         "what": "Signals availability to recruiters only, rather than to everyone including your employer.",
-                        "how": ["Profile → Open to → Recruiters only"],
+                        "how": ["Profile → Open to → Finding a new job → Recruiters only"],
+                    },
+                    {
+                        "name": "Data for generative AI training",
+                        "what": "Stops LinkedIn using your profile and posts to train its AI models.",
+                        "how": ["Settings & Privacy → Data privacy → Data for Generative AI Improvement → turn off"],
+                        "note": "This was switched on by default for most accounts when it launched.",
                     },
                     {
                         "name": "Third-party applications",
                         "what": "Shows every outside app connected to your account so you can revoke access.",
-                        "how": ["Settings & Privacy → Sign-in & Security → Third-party applications"],
+                        "how": ["Settings & Privacy → Data privacy → Other applications → Permitted services"],
                     },
                 ],
             },
@@ -847,7 +917,6 @@ PLATFORMS = [
     # ------------------------------------------------------------------ #
     {
         "name": "Roblox",
-        "emoji": "🧱",
         "slug": "roblox",
         "section": "Social media & messaging",
         "groups": [
@@ -864,14 +933,14 @@ PLATFORMS = [
                         "name": "Deactivate account",
                         "tag": "Reversible",
                         "what": "Temporarily disables your account — log back in any time to restore it.",
-                        "how": ["Settings (gear) → Privacy → Account Deactivation and Deletion → Deactivate"],
+                        "how": ["Settings (gear) → Account Info → Account Deactivation and Deletion → Deactivate"],
                     },
                     {
                         "name": "Delete account",
                         "tag": "Permanent",
                         "what": "Roblox doesn't offer instant self-serve deletion to everyone — the reliable route is the support form.",
                         "how": [
-                            "If shown|Settings → Privacy & Content Restrictions → Account Deactivation & Deletion → Delete Account",
+                            "If shown|Settings → Account Info → Account Deactivation and Deletion → Delete Account",
                             "Otherwise|Roblox Support contact form → Data Privacy Requests → Right to Be Forgotten",
                         ],
                         "note": "Expect an identity check and a short wait. This erases your profile, Robux, items and progress.",
@@ -886,6 +955,11 @@ PLATFORMS = [
                         "what": "Separately decides who can message you, join your games or send friend requests.",
                         "how": ["Settings → Privacy"],
                     },
+                    {
+                        "name": "Parental controls and PIN",
+                        "what": "Locks the privacy settings behind a PIN so they can't be loosened without it.",
+                        "how": ["Settings → Parental Controls → Account PIN → turn on"],
+                    },
                 ],
             },
             {
@@ -894,22 +968,22 @@ PLATFORMS = [
                     {
                         "name": "Social media link visibility",
                         "what": "Decides whether your other social accounts show on your Roblox profile.",
-                        "how": ["Settings → Privacy → Social media links"],
+                        "how": ["Settings → Privacy → Social Networks"],
                     },
                     {
                         "name": "Spatial voice and face tracking",
                         "what": "Turns off voice chat and webcam-based avatar face tracking entirely.",
-                        "how": ["Settings → Privacy → Spatial Voice / Face tracking"],
+                        "how": ["Settings → Privacy → Voice Chat / Camera"],
                     },
                     {
                         "name": "Trade and inventory privacy",
-                        "what": "Decides who can see the items in your inventory.",
-                        "how": ["Settings → Privacy"],
+                        "what": "Decides who can see the items in your inventory and send you trade requests.",
+                        "how": ["Settings → Privacy → Trading and inventory"],
                     },
                     {
-                        "name": "Account PIN",
-                        "what": "Locks your settings behind a PIN so they can't be changed without it.",
-                        "how": ["Settings → Security"],
+                        "name": "Content maturity",
+                        "what": "Limits which experiences your account can open, by age rating.",
+                        "how": ["Settings → Parental Controls → Content Maturity"],
                     },
                 ],
             },
@@ -918,7 +992,6 @@ PLATFORMS = [
     # ------------------------------------------------------------------ #
     {
         "name": "Wattpad",
-        "emoji": "📖",
         "slug": "wattpad",
         "section": "Social media & messaging",
         "groups": [
@@ -935,7 +1008,7 @@ PLATFORMS = [
                         "name": "Deactivate account",
                         "tag": "Reversible",
                         "what": "Closing your account first hides your profile while your comments stay on the site, anonymised.",
-                        "how": ["Account Settings → Delete Account"],
+                        "how": ["Settings → Account Settings → Delete Account"],
                         "note": "Reversible for 6 months just by logging back in — Wattpad uses one button for both steps.",
                     },
                     {
@@ -944,7 +1017,7 @@ PLATFORMS = [
                         "what": "After 6 months without logging in, your username, stories and library are deleted for good.",
                         "how": [
                             "Happens automatically 6 months after deactivating",
-                            "Or sooner|email privacy@wattpad.com",
+                            "Or sooner|contact Wattpad support with a data deletion request",
                         ],
                         "note": "Back up or unpublish your stories first — Wattpad won't do it for you and nothing is recoverable.",
                     },
@@ -956,7 +1029,7 @@ PLATFORMS = [
                     {
                         "name": "Story visibility and mature content",
                         "what": "Sets whether your stories are public or unlisted, and filters mature content in your feed.",
-                        "how": ["Account Settings → Privacy Settings"],
+                        "how": ["Settings → Privacy Settings"],
                     },
                 ],
             },
@@ -966,12 +1039,12 @@ PLATFORMS = [
                     {
                         "name": "Who can message or comment",
                         "what": "Limits who can contact you or comment on your stories.",
-                        "how": ["Account Settings → Privacy Settings"],
+                        "how": ["Settings → Privacy Settings"],
                     },
                     {
                         "name": "Reading list visibility",
                         "what": "Hides what you're reading or have bookmarked from people viewing your profile.",
-                        "how": ["Account Settings → Privacy Settings"],
+                        "how": ["Settings → Privacy Settings"],
                     },
                     {
                         "name": "Block specific users",
@@ -985,7 +1058,6 @@ PLATFORMS = [
     # ------------------------------------------------------------------ #
     {
         "name": "ChatGPT",
-        "emoji": "🤖",
         "slug": "chatgpt",
         "section": "AI tools",
         "groups": [
@@ -1006,6 +1078,7 @@ PLATFORMS = [
                             "Settings → Data Controls → Delete account",
                             "Or|submit a request through OpenAI's Privacy Portal",
                         ],
+                        "note": "Deletion is processed within about 30 days, subject to legal retention exceptions.",
                     },
                 ],
             },
@@ -1016,9 +1089,9 @@ PLATFORMS = [
                         "name": "Stop chats training future models",
                         "what": "Keeps your conversations out of future model training — it can't undo training that already happened.",
                         "how": [
-                            "Settings → Data Controls → turn off 'Improve the model for everyone' (sometimes called Chat History & Training)"
+                            "Settings → Data Controls → turn off 'Improve the model for everyone'"
                         ],
-                        "note": "Business, Enterprise, Edu and API accounts are already excluded by default.",
+                        "note": "Applies to your whole account, on every device. Business, Enterprise, Edu and API accounts are already excluded by default.",
                     },
                 ],
             },
@@ -1027,13 +1100,25 @@ PLATFORMS = [
                 "items": [
                     {
                         "name": "Temporary chat",
-                        "what": "A one-off chat that never saves to your history and is never used for training.",
-                        "how": ["New chat menu → Temporary chat"],
+                        "what": "A one-off chat that never saves to your history, never feeds memory, and is never used for training.",
+                        "how": ["New chat → Temporary chat toggle (top of the chat)"],
+                        "note": "Treat it as 'not saved and not trained on', not as private — OpenAI still holds it for about 30 days for abuse monitoring.",
                     },
                     {
-                        "name": "Memory controls",
-                        "what": "Lets you see, edit or clear the things ChatGPT has remembered about you.",
-                        "how": ["Settings → Personalisation → Memory"],
+                        "name": "Memory — two separate switches",
+                        "what": "Saved memories are an editable list of facts about you; reference chat history quietly pulls context from all your past chats.",
+                        "how": ["Settings → Personalisation → Memory → toggle each one independently"],
+                        "note": "Deleting a conversation does not delete the memory it created — you have to clear the memory itself.",
+                    },
+                    {
+                        "name": "Review your shared links",
+                        "what": "Any conversation you've ever hit Share on has a live public URL until you revoke it.",
+                        "how": ["Settings → Data Controls → Shared links → delete the ones you don't need"],
+                    },
+                    {
+                        "name": "Audit connected apps",
+                        "what": "Shows which outside services ChatGPT can read from, and lets you disconnect them.",
+                        "how": ["Settings → Connected apps"],
                     },
                 ],
             },
@@ -1042,7 +1127,6 @@ PLATFORMS = [
     # ------------------------------------------------------------------ #
     {
         "name": "Google Gemini",
-        "emoji": "✨",
         "slug": "gemini",
         "section": "AI tools",
         "groups": [
@@ -1105,7 +1189,6 @@ PLATFORMS = [
     # ------------------------------------------------------------------ #
     {
         "name": "Meta AI",
-        "emoji": "🔷",
         "slug": "meta-ai",
         "section": "AI tools",
         "groups": [
@@ -1122,7 +1205,7 @@ PLATFORMS = [
                         "name": "Object to AI training",
                         "tag": "Request",
                         "what": "There's no opt-out toggle — you file a formal objection and Meta reviews it case by case.",
-                        "how": ["Facebook → Settings → Privacy Centre → Generative AI → Right to Object form"],
+                        "how": ["Facebook → Settings & privacy → Privacy Centre → Generative AI → Right to Object form"],
                         "note": "These rights are strongest for EU and UK users under GDPR. Elsewhere Meta may refuse.",
                     },
                 ],
@@ -1130,6 +1213,11 @@ PLATFORMS = [
             {
                 "title": "Hidden settings",
                 "items": [
+                    {
+                        "name": "Delete your Meta AI conversations",
+                        "what": "Clears what you've said to Meta AI inside the chat thread.",
+                        "how": ["Open the Meta AI chat → type /reset-ai and send it"],
+                    },
                     {
                         "name": "Third-party info objection",
                         "what": "A separate objection covering data Meta bought or collected about you from outside sources.",
@@ -1147,7 +1235,6 @@ PLATFORMS = [
     # ------------------------------------------------------------------ #
     {
         "name": "Claude",
-        "emoji": "🅰️",
         "slug": "claude",
         "section": "AI tools",
         "groups": [
@@ -1192,6 +1279,11 @@ PLATFORMS = [
                         "what": "Removes a single chat from your history now, and from Anthropic's systems within 30 days.",
                         "how": ["Chat list → pick a conversation → Delete"],
                     },
+                    {
+                        "name": "Memory and past chat search",
+                        "what": "Controls whether Claude can look back through your earlier conversations for context.",
+                        "how": ["Settings → Capabilities → turn off search and reference chats"],
+                    },
                 ],
             },
         ],
@@ -1206,6 +1298,12 @@ GENERAL_NOTES = [
         "window quietly cancels it. That catches out a lot of people who meant to leave for good.",
     ),
     (
+        "Turn on two-step verification before anything else",
+        "Most stolen accounts are not hacked in any clever way. Someone talks you into forwarding "
+        "the six-digit code the app just texted you. A second PIN or passkey stops that cold, and "
+        "no company will ever ask you for that code or PIN.",
+    ),
+    (
         "Opting out of AI training only affects what comes next",
         "Turning training off protects future conversations. Anything already absorbed into a "
         "finished training run stays there — none of these companies have an unlearn button.",
@@ -1218,7 +1316,8 @@ GENERAL_NOTES = [
     ),
     (
         "Menus move — check the source if a path fails",
-        "Apps rename and relocate these controls every few months. If a path here doesn't match what "
-        "you see, the platform's own help centre article is the thing to trust.",
+        "Apps rename and relocate these controls every few months, and sometimes show different "
+        "menus to different people at the same time. If a path here doesn't match what you see, the "
+        "platform's own help centre article is the thing to trust.",
     ),
 ]
