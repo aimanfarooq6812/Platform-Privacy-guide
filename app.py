@@ -1,5 +1,5 @@
 """
-Trapdoor — find the setting.
+Trapdoor : find the setting.
 A plain-language index of the account and privacy controls that platforms bury.
 
 Run locally:   streamlit run app.py
@@ -12,7 +12,7 @@ import streamlit as st
 from data import GENERAL_NOTES, LAST_REVIEWED, PLATFORMS
 
 st.set_page_config(
-    page_title="Trapdoor — find the setting",
+    page_title="Trapdoor : find the setting",
     layout="centered",
     initial_sidebar_state="collapsed",
 )
