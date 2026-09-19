@@ -1,5 +1,5 @@
 """
-Find the setting.
+Trapdoor — find the setting.
 A plain-language index of the account and privacy controls that platforms bury.
 
 Run locally:   streamlit run app.py
@@ -9,11 +9,10 @@ import html
 
 import streamlit as st
 
-from data import GENERAL_NOTES, PLATFORMS
+from data import GENERAL_NOTES, LAST_REVIEWED, PLATFORMS
 
 st.set_page_config(
-    page_title="Find the setting",
-    page_icon="🔑",
+    page_title="Trapdoor — find the setting",
     layout="centered",
     initial_sidebar_state="collapsed",
 )
@@ -27,50 +26,43 @@ CSS = """
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
 
 :root {
-  --lavender: #C894EE;
-  --plum:     #821563;
-  --indigo:   #1F0240;
-  --violet:   #793A98;
-  --royal:    #28064C;
-  --bright:   #9F58E1;
-  --orchid:   #CF61C8;
-  --rose:     #BD3F89;
-  --deep:     #350967;
+  --shell:      #FFF7FB;
+  --petal:      #FDEBF4;
+  --blush:      #FBDCEC;
+  --rose:       #F7C2DD;
+  --pink:       #E0568F;
+  --pink-deep:  #C23A72;
+  --pink-soft:  #F294BE;
 
-  --ink:      #F4ECFC;
-  --ink-soft: #CDB6E4;
-  --ink-mute: #9E86BA;
+  --ink:        #3F2231;
+  --ink-soft:   #6B4257;
+  --ink-mute:   #93697F;
 
-  --line:     rgba(200, 148, 238, 0.16);
-  --line-lit: rgba(200, 148, 238, 0.38);
-  --card:     rgba(31, 2, 64, 0.44);
-  --card-lit: rgba(53, 9, 103, 0.55);
+  --line:       rgba(224, 86, 143, 0.18);
+  --line-lit:   rgba(224, 86, 143, 0.38);
+  --card:       rgba(255, 255, 255, 0.72);
+  --card-lit:   #FFFFFF;
 
-  --accent: linear-gradient(135deg,
-    #C894EE 0%, #821563 10%, #1F0240 20%, #793A98 30%, #28064C 40%,
-    #821563 50%, #9F58E1 60%, #CF61C8 70%, #BD3F89 80%, #350967 100%);
+  --accent: linear-gradient(120deg,
+    #F7C2DD 0%, #F294BE 28%, #E0568F 58%, #F294BE 82%, #FBDCEC 100%);
 }
 
 /* ---------- page shell ---------- */
 
 .stApp {
   background:
-    radial-gradient(120% 70% at 12% -8%, rgba(200, 148, 238, 0.16), transparent 62%),
-    radial-gradient(90% 55% at 92% 108%, rgba(207, 97, 200, 0.14), transparent 60%),
-    linear-gradient(180deg, rgba(9, 2, 22, 0.80) 0%, rgba(9, 2, 22, 0.88) 100%),
-    linear-gradient(135deg,
-      #C894EE 0%, #821563 10%, #1F0240 20%, #793A98 30%, #28064C 40%,
-      #821563 50%, #9F58E1 60%, #CF61C8 70%, #BD3F89 80%, #350967 100%);
-  background-attachment: fixed, fixed, fixed, fixed;
+    radial-gradient(120% 68% at 10% -10%, rgba(247, 194, 221, 0.55), transparent 62%),
+    radial-gradient(95% 58% at 94% 106%, rgba(242, 148, 190, 0.34), transparent 62%),
+    linear-gradient(180deg, #FFF7FB 0%, #FDEBF4 100%);
+  background-attachment: fixed, fixed, fixed;
   color: var(--ink);
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
 }
 
 [data-testid="stHeader"] {
-  background: linear-gradient(180deg, rgba(9, 2, 22, 0.94) 42%, rgba(9, 2, 22, 0));
+  background: linear-gradient(180deg, rgba(255, 247, 251, 0.95) 42%, rgba(255, 247, 251, 0));
   backdrop-filter: blur(7px);
 }
-/* hide Deploy + the burger menu, but NOT the sidebar button that sits in the toolbar */
 [data-testid="stToolbarActions"],
 [data-testid="stAppDeployButton"] { display: none !important; }
 #MainMenu, footer { visibility: hidden; }
@@ -81,7 +73,6 @@ CSS = """
   padding-bottom: 5rem;
 }
 
-/* kill the default gap between stacked markdown blocks */
 [data-testid="stMarkdownContainer"] > *:first-child { margin-top: 0; }
 
 /* ---------- hamburger (sidebar open button) ---------- */
@@ -94,16 +85,16 @@ CSS = """
   width: 44px !important;
   height: 44px !important;
   border-radius: 13px !important;
-  color: #E7D6F8 !important;
-  background: rgba(31, 2, 64, 0.78) !important;
+  color: var(--pink-deep) !important;
+  background: rgba(255, 255, 255, 0.86) !important;
   border: 1px solid var(--line-lit) !important;
   backdrop-filter: blur(10px);
   transition: border-color .18s ease, background .18s ease;
 }
 [data-testid="stExpandSidebarButton"]:hover,
 [data-testid="stSidebarCollapsedControl"] button:hover {
-  border-color: var(--orchid) !important;
-  background: rgba(53, 9, 103, 0.9) !important;
+  border-color: var(--pink) !important;
+  background: #FFFFFF !important;
 }
 [data-testid="stExpandSidebarButton"] > *,
 [data-testid="stSidebarCollapsedControl"] button > * { display: none !important; }
@@ -118,13 +109,12 @@ CSS = """
   box-shadow: 0 -6px 0 currentColor, 0 6px 0 currentColor;
 }
 
-/* collapse arrow inside the open sidebar */
 [data-testid="stSidebarCollapseButton"] button { color: var(--ink-soft) !important; }
 
 /* ---------- sidebar index ---------- */
 
 [data-testid="stSidebar"] {
-  background: linear-gradient(180deg, rgba(20, 3, 45, 0.97), rgba(12, 2, 30, 0.97));
+  background: linear-gradient(180deg, #FFFFFF 0%, #FEF3F8 100%);
   border-right: 1px solid var(--line);
 }
 [data-testid="stSidebar"] [data-testid="stSidebarContent"] { padding-top: 1rem; }
@@ -161,17 +151,16 @@ a.idx-link {
   transition: background .15s ease, color .15s ease, border-color .15s ease;
 }
 a.idx-link:hover {
-  background: rgba(159, 88, 225, 0.16);
-  border-left-color: var(--orchid);
-  color: var(--ink) !important;
+  background: rgba(224, 86, 143, 0.1);
+  border-left-color: var(--pink);
+  color: var(--pink-deep) !important;
 }
 a.idx-link.lead {
-  color: var(--ink) !important;
-  font-weight: 550;
-  background: rgba(159, 88, 225, 0.1);
-  border-left-color: var(--lavender);
+  color: var(--pink-deep) !important;
+  font-weight: 600;
+  background: rgba(224, 86, 143, 0.08);
+  border-left-color: var(--pink-soft);
 }
-.idx-em { margin-right: 0.5rem; }
 
 /* ---------- hero ---------- */
 
@@ -188,7 +177,7 @@ a.idx-link.lead {
   font-weight: 600;
   letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: var(--orchid);
+  color: var(--pink);
   margin-bottom: 0.9rem;
 }
 .hero h1 {
@@ -197,11 +186,9 @@ a.idx-link.lead {
   font-weight: 700;
   letter-spacing: -0.035em;
   margin: 0 0 1rem;
-  background: linear-gradient(120deg, #F4ECFC 10%, #C894EE 45%, #CF61C8 80%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
+  color: var(--ink);
 }
+.hero h1 em { font-style: normal; color: var(--pink); }
 .hero p.lede {
   font-size: 1.03rem;
   line-height: 1.65;
@@ -209,7 +196,7 @@ a.idx-link.lead {
   margin: 0 0 1.5rem;
   max-width: 60ch;
 }
-.rule { height: 2px; border: 0; background: var(--accent); border-radius: 2px; margin: 0 0 1.7rem; }
+.rule { height: 3px; border: 0; background: var(--accent); border-radius: 3px; margin: 0 0 1.7rem; }
 
 .how-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 0.7rem; margin-bottom: 1.4rem; }
 .how-card {
@@ -221,23 +208,23 @@ a.idx-link.lead {
 .how-card .n {
   font-family: 'JetBrains Mono', monospace;
   font-size: 0.72rem;
-  color: var(--orchid);
+  color: var(--pink);
   display: block;
   margin-bottom: 0.4rem;
 }
-.how-card .t { font-size: 0.92rem; font-weight: 600; margin-bottom: 0.25rem; }
+.how-card .t { font-size: 0.92rem; font-weight: 600; margin-bottom: 0.25rem; color: var(--ink); }
 .how-card .d { font-size: 0.83rem; line-height: 1.5; color: var(--ink-mute); }
 
 .hint {
   font-size: 0.86rem;
-  color: var(--ink-mute);
-  background: rgba(159, 88, 225, 0.09);
+  color: var(--ink-soft);
+  background: rgba(251, 220, 236, 0.66);
   border: 1px solid var(--line);
   border-radius: 12px;
   padding: 0.7rem 0.95rem;
   margin-bottom: 2.6rem;
 }
-.hint b { color: var(--ink-soft); font-weight: 600; }
+.hint b { color: var(--pink-deep); font-weight: 600; }
 
 /* ---------- section headings ---------- */
 
@@ -262,7 +249,7 @@ a.idx-link.lead {
 details { border: 0; }
 summary { cursor: pointer; list-style: none; }
 summary::-webkit-details-marker { display: none; }
-summary:focus-visible { outline: 2px solid var(--orchid); outline-offset: 3px; border-radius: 12px; }
+summary:focus-visible { outline: 2px solid var(--pink); outline-offset: 3px; border-radius: 12px; }
 
 .platform {
   background: var(--card);
@@ -270,10 +257,14 @@ summary:focus-visible { outline: 2px solid var(--orchid); outline-offset: 3px; b
   border-radius: 16px;
   margin-bottom: 0.6rem;
   overflow: hidden;
-  transition: border-color .18s ease;
+  transition: border-color .18s ease, box-shadow .18s ease;
 }
 .platform:hover { border-color: var(--line-lit); }
-.platform[open] { background: var(--card-lit); border-color: var(--line-lit); }
+.platform[open] {
+  background: var(--card-lit);
+  border-color: var(--line-lit);
+  box-shadow: 0 2px 14px rgba(224, 86, 143, 0.08);
+}
 
 .p-sum {
   display: flex;
@@ -281,8 +272,7 @@ summary:focus-visible { outline: 2px solid var(--orchid); outline-offset: 3px; b
   gap: 0.8rem;
   padding: 1.05rem 1.15rem;
 }
-.p-emoji { font-size: 1.15rem; line-height: 1; }
-.p-name { font-size: 1.08rem; font-weight: 600; letter-spacing: -0.015em; flex: 1; }
+.p-name { font-size: 1.08rem; font-weight: 600; letter-spacing: -0.015em; flex: 1; color: var(--ink); }
 .p-count {
   font-family: 'JetBrains Mono', monospace;
   font-size: 0.7rem;
@@ -297,7 +287,7 @@ summary:focus-visible { outline: 2px solid var(--orchid); outline-offset: 3px; b
   margin: -4px 4px 0 2px;
   transition: transform .2s ease, border-color .2s ease;
 }
-.platform[open] > .p-sum .chev { transform: rotate(-135deg); margin-top: 3px; border-color: var(--lavender); }
+.platform[open] > .p-sum .chev { transform: rotate(-135deg); margin-top: 3px; border-color: var(--pink); }
 
 .p-body { padding: 0 1.15rem 0.55rem; }
 
@@ -306,7 +296,7 @@ summary:focus-visible { outline: 2px solid var(--orchid); outline-offset: 3px; b
   font-weight: 600;
   letter-spacing: 0.16em;
   text-transform: uppercase;
-  color: var(--ink-mute);
+  color: var(--pink);
   padding: 1rem 0 0.5rem;
 }
 
@@ -316,11 +306,11 @@ summary:focus-visible { outline: 2px solid var(--orchid); outline-offset: 3px; b
   border: 1px solid var(--line);
   border-radius: 12px;
   margin-bottom: 0.4rem;
-  background: rgba(9, 2, 22, 0.32);
-  transition: border-color .16s ease;
+  background: rgba(253, 235, 244, 0.5);
+  transition: border-color .16s ease, background .16s ease;
 }
 .setting:hover { border-color: var(--line-lit); }
-.setting[open] { border-color: var(--line-lit); background: rgba(9, 2, 22, 0.5); }
+.setting[open] { border-color: var(--line-lit); background: rgba(253, 235, 244, 0.85); }
 
 .s-sum {
   display: flex;
@@ -328,7 +318,7 @@ summary:focus-visible { outline: 2px solid var(--orchid); outline-offset: 3px; b
   gap: 0.6rem;
   padding: 0.72rem 0.9rem;
 }
-.s-name { font-size: 0.94rem; font-weight: 500; flex: 1; }
+.s-name { font-size: 0.94rem; font-weight: 500; flex: 1; color: var(--ink); }
 .tag {
   font-family: 'JetBrains Mono', monospace;
   font-size: 0.62rem;
@@ -338,11 +328,12 @@ summary:focus-visible { outline: 2px solid var(--orchid); outline-offset: 3px; b
   white-space: nowrap;
   border: 1px solid var(--line-lit);
   color: var(--ink-soft);
+  background: rgba(255, 255, 255, 0.7);
 }
-.tag.permanent { color: #F4B8DC; border-color: rgba(189, 63, 137, 0.6); background: rgba(189, 63, 137, 0.14); }
-.tag.reversible { color: #D9BBF5; border-color: rgba(159, 88, 225, 0.5); background: rgba(159, 88, 225, 0.12); }
+.tag.permanent { color: #A82B5E; border-color: rgba(194, 58, 114, 0.45); background: rgba(247, 194, 221, 0.5); }
+.tag.reversible { color: #8A4E9E; border-color: rgba(168, 116, 190, 0.4); background: rgba(240, 222, 248, 0.6); }
 .setting .chev { width: 7px; height: 7px; margin-right: 2px; }
-.setting[open] > .s-sum .chev { transform: rotate(-135deg); margin-top: 3px; border-color: var(--lavender); }
+.setting[open] > .s-sum .chev { transform: rotate(-135deg); margin-top: 3px; border-color: var(--pink); }
 
 .s-body { padding: 0 0.9rem 0.95rem; }
 .what {
@@ -364,7 +355,7 @@ summary:focus-visible { outline: 2px solid var(--orchid); outline-offset: 3px; b
   color: var(--ink-mute);
   margin-bottom: 0.4rem;
 }
-.route-label em { font-style: normal; color: var(--orchid); }
+.route-label em { font-style: normal; color: var(--pink); }
 .trail { display: flex; flex-wrap: wrap; align-items: center; gap: 0.3rem 0.1rem; }
 .step {
   font-family: 'JetBrains Mono', monospace;
@@ -372,12 +363,12 @@ summary:focus-visible { outline: 2px solid var(--orchid); outline-offset: 3px; b
   line-height: 1.35;
   padding: 0.26rem 0.55rem;
   border-radius: 7px;
-  background: rgba(159, 88, 225, 0.14);
-  border: 1px solid rgba(159, 88, 225, 0.22);
-  color: #EBDCF9;
+  background: #FFFFFF;
+  border: 1px solid rgba(224, 86, 143, 0.24);
+  color: var(--ink-soft);
 }
-.step.last { background: rgba(207, 97, 200, 0.2); border-color: rgba(207, 97, 200, 0.42); color: #FBE7F6; }
-.arrow { color: var(--ink-mute); font-size: 0.72rem; padding: 0 0.22rem; }
+.step.last { background: rgba(247, 194, 221, 0.62); border-color: rgba(224, 86, 143, 0.45); color: var(--pink-deep); font-weight: 500; }
+.arrow { color: var(--pink-soft); font-size: 0.72rem; padding: 0 0.22rem; }
 
 .note {
   font-size: 0.82rem;
@@ -385,7 +376,7 @@ summary:focus-visible { outline: 2px solid var(--orchid); outline-offset: 3px; b
   color: var(--ink-mute);
   margin: 0.75rem 0 0;
   padding-left: 0.75rem;
-  border-left: 2px solid var(--rose);
+  border-left: 2px solid var(--pink-soft);
 }
 
 /* ---------- closing notes ---------- */
@@ -397,11 +388,40 @@ summary:focus-visible { outline: 2px solid var(--orchid); outline-offset: 3px; b
   padding: 1.05rem 1.15rem;
   margin-bottom: 0.6rem;
 }
-.note-card h3 { font-size: 0.95rem; font-weight: 600; margin: 0 0 0.45rem; color: var(--ink); }
-.note-card p { font-size: 0.87rem; line-height: 1.6; color: var(--ink-mute); margin: 0; }
+.note-card h3 { font-size: 0.95rem; font-weight: 600; margin: 0 0 0.45rem; color: var(--pink-deep); }
+.note-card p { font-size: 0.87rem; line-height: 1.6; color: var(--ink-soft); margin: 0; }
+
+/* ---------- update banner + footer ---------- */
+
+.update {
+  background: linear-gradient(120deg, rgba(251, 220, 236, 0.9), rgba(253, 235, 244, 0.7));
+  border: 1px solid var(--line-lit);
+  border-radius: 16px;
+  padding: 1.25rem 1.35rem;
+  margin-top: 2.6rem;
+}
+.update h3 {
+  font-size: 1rem;
+  font-weight: 600;
+  margin: 0 0 0.5rem;
+  color: var(--pink-deep);
+}
+.update p { font-size: 0.89rem; line-height: 1.65; color: var(--ink-soft); margin: 0 0 0.6rem; }
+.update p:last-child { margin-bottom: 0; }
+.update .stamp {
+  display: inline-block;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.72rem;
+  color: var(--pink-deep);
+  background: #FFFFFF;
+  border: 1px solid var(--line-lit);
+  border-radius: 20px;
+  padding: 0.25rem 0.7rem;
+  margin-top: 0.35rem;
+}
 
 .foot {
-  margin-top: 2.6rem;
+  margin-top: 1.6rem;
   padding-top: 1.4rem;
   border-top: 1px solid var(--line);
   font-size: 0.8rem;
@@ -433,7 +453,7 @@ def esc(text: str) -> str:
 
 
 def render_trail(route: str) -> str:
-    """Turn 'Settings → Privacy → Limits' into a chain of step pills."""
+    """Turn 'Settings -> Privacy -> Limits' into a chain of step pills."""
     label = ""
     if "|" in route:
         label, route = route.split("|", 1)
@@ -443,12 +463,12 @@ def render_trail(route: str) -> str:
     for i, step in enumerate(steps):
         last = " last" if i == len(steps) - 1 and len(steps) > 1 else ""
         if i:
-            pills.append('<span class="arrow">→</span>')
+            pills.append('<span class="arrow">&rarr;</span>')
         pills.append(f'<span class="step{last}">{esc(step)}</span>')
 
     head = "How to get there"
     if label:
-        head = f"How to get there <em>· {esc(label.strip())}</em>"
+        head = f"How to get there <em>&middot; {esc(label.strip())}</em>"
 
     return (
         '<div class="route">'
@@ -497,7 +517,6 @@ def render_platform(platform: dict) -> str:
         f'<span class="anchor" id="{platform["slug"]}"></span>'
         '<details class="platform">'
         '<summary class="p-sum">'
-        f'<span class="p-emoji">{platform["emoji"]}</span>'
         f'<span class="p-name">{esc(platform["name"])}</span>'
         f'<span class="p-count">{count} settings</span>'
         '<span class="chev"></span>'
@@ -524,12 +543,12 @@ for section in sections:
     for p in PLATFORMS:
         if p["section"] == section:
             index_html.append(
-                f'<a class="idx-link" href="#{p["slug"]}">'
-                f'<span class="idx-em">{p["emoji"]}</span>{esc(p["name"])}</a>'
+                f'<a class="idx-link" href="#{p["slug"]}">{esc(p["name"])}</a>'
             )
 
 index_html.append('<div class="idx-group">Worth knowing</div>')
 index_html.append('<a class="idx-link" href="#notes">Before you delete anything</a>')
+index_html.append('<a class="idx-link" href="#updates">How this site stays current</a>')
 
 with st.sidebar:
     st.markdown("".join(index_html), unsafe_allow_html=True)
@@ -539,20 +558,24 @@ with st.sidebar:
 # Page
 # --------------------------------------------------------------------------- #
 
+total_settings = sum(
+    len(g["items"]) for p in PLATFORMS for g in p["groups"]
+)
+
 st.markdown(
     "".join(
         [
             '<span class="anchor" id="top"></span>',
             '<div class="hero">',
             '<div class="eyebrow">Privacy &amp; account control</div>',
-            "<h1>The settings apps would rather you didn't find</h1>",
+            "<h1>The settings apps would rather you <em>didn't find</em></h1>",
             '<p class="lede">Every platform hides its privacy controls somewhere different, and renames '
             "them every few months. This is a plain index of where they actually live — how to go quiet, "
             "how to pause an account, and how to leave for good.</p>",
             '<hr class="rule">',
             '<div class="how-grid">',
             '<div class="how-card"><span class="n">01</span><div class="t">Pick a platform</div>'
-            '<div class="d">Scroll, or open the index with the ☰ button in the top-left corner.</div></div>',
+            '<div class="d">Scroll, or open the index with the menu button in the top-left corner.</div></div>',
             '<div class="how-card"><span class="n">02</span><div class="t">Open the setting</div>'
             '<div class="d">Each one explains in a line what it does, then shows the exact route to it.</div></div>',
             '<div class="how-card"><span class="n">03</span><div class="t">Follow the trail</div>'
@@ -588,8 +611,21 @@ st.markdown(
             for title, body in GENERAL_NOTES
         ]
         + [
-            '<div class="foot">Covers 17 platforms across social media, messaging and AI tools. '
-            "Nothing here is stored or sent anywhere — it's a reference page, not a service.</div>"
+            '<span class="anchor" id="updates"></span>',
+            '<div class="update">',
+            "<h3>This site is kept up to date</h3>",
+            "<p>Platforms move these controls constantly — a menu that was two taps deep last term can "
+            "be somewhere else entirely by the next one, and some apps show different menus to different "
+            "people at the same time.</p>",
+            "<p>Because of that, every path on this page is reviewed and refreshed every few months, "
+            "with new settings added as platforms release them and old ones corrected when they move. "
+            "If something here doesn't match what you see on your screen, check the platform's own help "
+            "centre — and the fix will land here at the next review.</p>",
+            f'<span class="stamp">Last reviewed: {esc(LAST_REVIEWED)}</span>',
+            "</div>",
+            f'<div class="foot">Covers {len(PLATFORMS)} platforms and {total_settings} settings across '
+            "social media, messaging and AI tools. Nothing here is stored or sent anywhere — "
+            "it's a reference page, not a service.</div>",
         ]
     ),
     unsafe_allow_html=True,
