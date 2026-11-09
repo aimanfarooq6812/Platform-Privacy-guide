@@ -6,15 +6,15 @@ Each platform:
     groups  -> sections shown inside the platform dropdown
     items   -> one dropdown each: what it does (1 line) + how to get there
 
-`how` is a list of routes. Write a route as "Step -> Step -> Step" using the
-arrow character. Add a device or context label with a pipe:
-    "On iPhone|Settings -> Support -> ...".
+`how` is a list of routes. Write a route as "Step → Step → Step" using the
+arrow character (→, not ->). Add a device or context label with a pipe:
+    "On iPhone|Settings → Support → ...".
 
 LAST_REVIEWED is shown at the bottom of the page. Update it whenever you do
 a pass over these paths.
 """
 
-LAST_REVIEWED = "September 2026"
+LAST_REVIEWED = "November 2026"
 
 PLATFORMS = [
     # ------------------------------------------------------------------ #
@@ -39,8 +39,9 @@ PLATFORMS = [
                         "how": [
                             "If you see Personal details|Settings and privacy → Accounts Centre → Personal details → Account ownership and control → Deactivation or deletion → pick your account → Deactivate account → confirm with password",
                             "If you see Manage accounts|Settings and privacy → Accounts Centre → Manage accounts → Manage next to your profile → Deactivation or deletion → pick your account → Deactivate account → confirm with password",
+                            "On the web|More (left sidebar) → Settings → Accounts Centre → Personal details → Account ownership and control → Deactivation or deletion → pick your account → Deactivate account",
                         ],
-                        "note": "Meta has shipped two versions of this menu, so check which one your screen shows. No time limit on staying deactivated, but Instagram only lets you deactivate once every 7 days.",
+                        "note": "Meta has shipped more than one version of this menu, so check which one your screen shows. No time limit on staying deactivated, but Instagram only lets you deactivate once every 7 days.",
                     },
                     {
                         "name": "Delete account",
@@ -49,7 +50,7 @@ PLATFORMS = [
                         "how": [
                             "Same path as Deactivate → Delete account → pick a reason → enter password → confirm"
                         ],
-                        "note": "Usually 30 days to change your mind, though Meta says the exact window varies by region. Logging back in during it cancels the deletion. Download your data first — the export tool stops working once deletion starts.",
+                        "note": "Usually 30 days to change your mind, though Meta says the exact window varies by region. Logging back in during it cancels the deletion. Download your data first — the export tool stops working once deletion starts. Deleting Instagram can affect any Facebook logins linked through Accounts Centre.",
                     },
                 ],
             },
@@ -102,6 +103,13 @@ PLATFORMS = [
                         "what": "Stops strangers starting a DM thread or pulling you into a group chat.",
                         "how": ["Settings and privacy → Messages and story replies → set each category"],
                     },
+                    {
+                        "name": "Activity from other businesses",
+                        "tag": "Replaced",
+                        "what": "Controls whether information other websites and apps share with Meta is used to personalise your ads, Feed and Meta AI answers.",
+                        "how": ["Settings and privacy → Accounts Centre → Ad preferences → Activity from other businesses"],
+                        "note": "Meta retired the older 'Your activity off Meta technologies' switch from July 2026 in the US and several other countries. The new one limits how the data is used, not whether Meta receives it. Same setting as on Facebook — see there for details.",
+                    },
                 ],
             },
         ],
@@ -126,16 +134,17 @@ PLATFORMS = [
                         "tag": "Reversible",
                         "what": "Hides your profile and content from everyone while keeping all your data intact.",
                         "how": [
-                            "Settings & privacy → Accounts Centre → Personal details → Account ownership and control → Deactivation or deletion → pick account → Deactivate"
+                            "Settings & privacy → Settings → See more in Accounts Centre → Personal details → Account ownership and control → Deactivation or deletion → pick account → Deactivate account",
+                            "If you don't see Accounts Centre|Settings & privacy → Settings → Your Facebook information → Deactivation and deletion → Deactivate account",
                         ],
-                        "note": "Logging back in reactivates you instantly. If your Accounts Centre shows Manage accounts instead of Personal details, go through that and then Deactivation or deletion.",
+                        "note": "Logging back in reactivates you instantly. Messenger stays active when you deactivate Facebook — deactivate it separately from the Messenger app if you want both gone. If your Accounts Centre shows Manage accounts instead of Personal details, go through that and then Deactivation or deletion.",
                     },
                     {
                         "name": "Delete account",
                         "tag": "Permanent",
                         "what": "Removes your profile and data for good.",
                         "how": ["Same path as Deactivate → Delete account → confirm"],
-                        "note": "30-day grace period — don't log back in if you want the deletion to stick.",
+                        "note": "30-day grace period — don't log back in if you want the deletion to stick. Download your information first from Accounts Centre → Your information and permissions → Export your information.",
                     },
                 ],
             },
@@ -163,9 +172,11 @@ PLATFORMS = [
                         "how": ["Settings & privacy → Privacy → Limit who can see your past posts"],
                     },
                     {
-                        "name": "Off-Facebook activity",
-                        "what": "Shows what other apps and websites report about you to Facebook, and lets you disconnect it.",
-                        "how": ["Settings → Your Facebook Information → Off-Facebook Activity"],
+                        "name": "Activity from other businesses",
+                        "tag": "Replaced",
+                        "what": "Controls whether information other websites and apps share with Meta is used to personalise your ads, Feed and Meta AI answers.",
+                        "how": ["Settings & privacy → Settings → Accounts Centre → Ad preferences → Activity from other businesses"],
+                        "note": "This replaces 'Your activity off Meta technologies' (originally Off-Facebook Activity), which Meta retired from July 2026 in the US and a number of other countries, with more to follow. The new switch only limits how the data is used — it doesn't stop Meta receiving it — and that data now also shapes your Feed and Meta AI, not just ads. Meta's announcement didn't give the exact menu path; this setting was formerly called 'Activity information from ad partners', so look under Ad preferences. In countries where the rollout hasn't reached yet you may still see the old setting under Accounts Centre → Your information and permissions.",
                     },
                     {
                         "name": "Profile and tagging review",
@@ -175,7 +186,8 @@ PLATFORMS = [
                     {
                         "name": "Ad preferences",
                         "what": "Shows the interest categories advertisers use to target you, and lets you delete them.",
-                        "how": ["Settings → Ads → Ad preferences"],
+                        "how": ["Settings & privacy → Settings → Accounts Centre → Ad preferences"],
+                        "note": "Ad controls have moved into Accounts Centre, so the old Settings → Ads route may no longer be there.",
                     },
                     {
                         "name": "Location history",
@@ -213,9 +225,11 @@ PLATFORMS = [
                         "tag": "Permanent",
                         "what": "Erases your profile, Snap Map presence and account data.",
                         "how": [
-                            "On Android or desktop|accounts.snapchat.com → log in → Delete My Account → re-enter your details → confirm",
-                            "On iPhone|Settings (gear) → Support → I Need Help → My Account & Security → Account Information → Delete My Account",
+                            "In the app|Profile (top left) → gear icon → scroll to Account Actions → Delete Account → re-enter your details → confirm",
+                            "On the web|accounts.snapchat.com → log in → Delete My Account → re-enter your details → confirm",
+                            "If you don't see Account Actions|Settings (gear) → Support → I Need Help → My Account & Security → Account Information → Delete My Account",
                         ],
+                        "note": "Snapchat now offers deletion straight from the app's settings on iPhone and Android, not just the web portal. Save your Memories and download your data first (Settings → Privacy Controls → My Data, or My Data on accounts.snapchat.com). There's no instant deletion — everything goes after the 30-day hold.",
                     },
                 ],
             },
@@ -225,13 +239,14 @@ PLATFORMS = [
                     {
                         "name": "Ghost Mode",
                         "what": "Removes your avatar from the Snap Map so no other user can see where you are.",
-                        "how": ["Snap Map → gear icon (top right of the map) → turn on Ghost Mode → choose how long"],
-                        "note": "Ghost Mode hides you from other users only — Snapchat keeps collecting your location.",
+                        "how": ["Snap Map → gear icon (top right of the map) → turn on Ghost Mode → choose 3 hours, 24 hours or Until Turned Off"],
+                        "note": "Ghost Mode hides your location from other users on the Map. Snaps you submit to Snap Map can still show up there.",
                     },
                     {
                         "name": "Who can contact you",
                         "what": "Limits who can send you snaps and chats to friends only, instead of everyone.",
                         "how": ["Settings → Privacy Controls → Contact Me → My Friends"],
+                        "note": "The choices are friends only, or friends plus your phone contacts. People who aren't friends can only message you if they're 18 or over.",
                     },
                 ],
             },
@@ -241,7 +256,7 @@ PLATFORMS = [
                     {
                         "name": "Custom location sharing",
                         "what": "Shares your location with a chosen few friends instead of everyone or no one.",
-                        "how": ["Snap Map → gear icon → See My Location → pick specific friends"],
+                        "how": ["Snap Map → gear icon → See My Location → My Friends, Except… or Only These Friends"],
                     },
                     {
                         "name": "See me in Quick Add",
@@ -286,16 +301,17 @@ PLATFORMS = [
                         "name": "Disable account",
                         "tag": "Reversible",
                         "what": "Discord's version of deactivating — removes your account from view without deleting anything.",
-                        "how": ["User Settings → My Account → scroll to Account Removal → Disable Account"],
+                        "how": ["User Settings → Account → scroll to the bottom → Disable Account"],
+                        "note": "Discord's help pages still call the Account page 'My Account'.",
                     },
                     {
                         "name": "Delete account",
                         "tag": "Permanent",
                         "what": "Wipes your account for good.",
                         "how": [
-                            "User Settings → My Account → Account Removal → Delete Account → enter password and 2FA code → confirm"
+                            "User Settings → Account → scroll to the bottom → Delete Account → enter password and 2FA code → confirm"
                         ],
-                        "note": "Hand over or delete any servers you own first, or Discord won't let you continue. Your messages stay visible in servers, relabelled 'Deleted User'. Takes about 14 days, and logging in cancels it.",
+                        "note": "Hand over or delete any servers you own first, or Discord won't let you continue. Your messages stay visible in servers, relabelled 'Deleted User' — delete anything you want gone before you go. Takes about 14 days, and logging in cancels it. If you want a copy of your data, request it first: the package can take up to 30 days, and the request is cancelled if you disable or delete the account before it arrives. Discord may also delete accounts left inactive for two years.",
                     },
                 ],
             },
@@ -319,9 +335,19 @@ PLATFORMS = [
                 "items": [
                     {
                         "name": "Data & privacy toggles",
-                        "what": "Separate switches for personalised recommendations, tailored sponsored content and 'improving Discord'.",
-                        "how": ["User Settings → Data & Privacy"],
+                        "what": "Separate switches for using your data to improve Discord, personalising sponsored content (from your Discord activity and from third-party data), and voice recording in Clips.",
+                        "how": [
+                            "User Settings → Data & Privacy",
+                            "On mobile|You tab → gear icon → Data & Privacy, plus Clips for the voice recording switch",
+                        ],
                         "note": "Most of these are on by default.",
+                    },
+                    {
+                        "name": "Message content on web pages",
+                        "tag": "New",
+                        "what": "Stops new messages you send in Discoverable server channels appearing on Discord's public Server Web Pages and in search results.",
+                        "how": ["User Settings → Data & Privacy → turn off 'Show my message content from Discoverable channels on web pages'"],
+                        "note": "Only affects messages you send after switching it off — delete older ones to remove them from public pages. If it's missing from the mobile app, use the desktop app or discord.com/settings/data-and-privacy. It applies to your whole account.",
                     },
                     {
                         "name": "Safe direct messaging",
@@ -334,9 +360,10 @@ PLATFORMS = [
                         "how": ["User Settings → Content & Social → Friend Requests"],
                     },
                     {
-                        "name": "Request all of my data",
+                        "name": "Request your data",
                         "what": "Downloads a full archive of everything Discord has stored about you.",
-                        "how": ["User Settings → Data & Privacy → Request all of my data"],
+                        "how": ["User Settings → Data & Privacy → Request Data"],
+                        "note": "Discord says the package can take up to 30 days to arrive.",
                     },
                     {
                         "name": "Ignore someone",
@@ -375,7 +402,7 @@ PLATFORMS = [
                         "how": [
                             "Settings and privacy → Account → Deactivate or delete account → follow the prompts and verify with your password or a code"
                         ],
-                        "note": "30 days before it's final — logging in cancels it.",
+                        "note": "30 days before it's final — logging in cancels it. Download your data first (see below).",
                     },
                 ],
             },
@@ -427,6 +454,11 @@ PLATFORMS = [
                         "name": "Personalisation and data",
                         "what": "Turns off ad personalisation and resets what the algorithm has learned about you.",
                         "how": ["Settings and privacy → Privacy → Personalisation and data"],
+                    },
+                    {
+                        "name": "Download your data",
+                        "what": "Saves a copy of your videos and account information before you delete or leave.",
+                        "how": ["Settings and privacy → Account → Download your data → Request data"],
                     },
                     {
                         "name": "Restricted mode",
@@ -507,12 +539,15 @@ PLATFORMS = [
                         "how": ["Settings and privacy → Privacy and safety → Audience, media and tagging → Photo tagging"],
                     },
                     {
-                        "name": "Data sharing and Grok training",
-                        "what": "Stops your posts and activity being used for ad partners and for training X's AI model.",
+                        "name": "Grok and third-party data sharing",
+                        "tag": "Renamed",
+                        "what": "Stops your posts and activity being used to train X's AI model, Grok, and being shared with outside collaborators and ad partners.",
                         "how": [
-                            "Settings and privacy → Privacy and safety → Data sharing and personalisation",
-                            "For the AI model|Settings and privacy → Privacy and safety → Grok → turn off data sharing",
+                            "Settings and privacy → Privacy and safety → Data sharing and personalisation → Grok & Third-party Collaborators → turn off",
+                            "On mobile|Profile icon → Settings and Support → Settings and privacy → Privacy and safety → Data sharing and personalisation → Grok & Third-party Collaborators",
+                            "For ad partners|Settings and privacy → Privacy and safety → Data sharing and personalisation → Data sharing with business partners",
                         ],
+                        "note": "Older guides say this switch is desktop-only; recent ones show it in the app too, so try the app first and fall back to x.com in a browser. It only affects future use. The standalone Grok app has its own separate 'Improve the model' setting, and xAI's Privacy Portal handles requests about data already collected.",
                     },
                 ],
             },
@@ -583,15 +618,16 @@ PLATFORMS = [
                     },
                     {
                         "name": "Strict account settings",
-                        "what": "A lockdown mode that forces your privacy settings to contacts-only and limits what people outside your contacts can do.",
+                        "what": "A lockdown mode that blocks media and attachments from people outside your contacts, turns off link previews, silences unknown callers, switches on two-step verification and lets only your contacts add you to groups.",
                         "how": ["Settings → Privacy → Advanced → turn on Strict account settings"],
-                        "note": "Rolled out in 2026, aimed at people at higher risk of targeted attacks. It trades some convenience for a much smaller attack surface.",
+                        "note": "Launched in January 2026 for people at higher risk of targeted attacks. It can only be switched on or off from your phone, not WhatsApp Web, and it trades some convenience for a much smaller attack surface.",
                     },
                     {
                         "name": "Username and username key",
+                        "tag": "Rolling out",
                         "what": "Lets people reach you by username instead of your phone number, with an optional key so only people who have both can start a chat.",
-                        "how": ["Settings → Profile → Username"],
-                        "note": "Rolling out through 2026, so it may not have reached your account yet. Worth checking if you'd rather not hand out your number.",
+                        "how": ["Settings → Account → Username"],
+                        "note": "Username reservations opened in late June 2026 and the wider rollout is gradual, so it may not have reached your account yet. If you have Facebook or Instagram you can reuse the same username. WhatsApp also now limits how many new people one account can contact, as a guard against spam accounts.",
                     },
                     {
                         "name": "Chat lock",
@@ -652,15 +688,17 @@ PLATFORMS = [
                         "tag": "Safety net",
                         "what": "Instead of deactivating, Telegram deletes your account after a set stretch of inactivity.",
                         "how": ["Settings → Privacy and Security → Delete my account if away for → 1, 3, 6 or 12 months"],
+                        "note": "Telegram's default is 6 months of inactivity.",
                     },
                     {
                         "name": "Delete account",
                         "tag": "Permanent",
                         "what": "Immediately wipes your account, contacts, chats and media from Telegram's cloud.",
                         "how": [
-                            "Settings → Privacy and Security → scroll to the bottom → Delete my account → confirm your phone number"
+                            "On iPhone|Settings → Privacy and Security → Delete my account → If Away For → Delete Account Now",
+                            "On Android|Settings → Telegram FAQ → Delete your Telegram account (opens a web page where you confirm your phone number)",
                         ],
-                        "note": "Groups and channels you own pass to the next longest-serving admin unless you delete or transfer them first.",
+                        "note": "Groups and channels you own pass to the next longest-serving admin unless you delete or transfer them first. The in-app route differs by phone, so if one doesn't match, use the delete page on Telegram's website.",
                     },
                 ],
             },
@@ -727,8 +765,12 @@ PLATFORMS = [
                         "name": "Delete account",
                         "tag": "Permanent",
                         "what": "Immediate and permanent, with no grace period or undo window.",
-                        "how": ["Settings → Account → Delete Account → confirm with password"],
-                        "note": "Your posts and comments stay up as '[deleted]' unless you remove them yourself first.",
+                        "how": [
+                            "On the web|Avatar → Settings → Account tab → scroll to Advanced → Delete account → confirm with username and password",
+                            "On iPhone|Avatar → menu → Settings → Support → Delete account",
+                            "On Android|Avatar → menu → Settings → Account settings → Delete account",
+                        ],
+                        "note": "Your posts and comments stay up as '[deleted]' unless you remove them yourself first. Cancel Reddit Premium separately beforehand — deleting the account doesn't stop billing. If you sign in with Google or Apple, Reddit asks you to create a password first.",
                     },
                 ],
             },
@@ -736,9 +778,10 @@ PLATFORMS = [
                 "title": "Core privacy settings",
                 "items": [
                     {
-                        "name": "Safety & Privacy tab",
+                        "name": "Privacy tab",
                         "what": "The central hub for most of Reddit's visibility controls.",
-                        "how": ["Settings → Safety & Privacy"],
+                        "how": ["Settings → Privacy"],
+                        "note": "Older versions of the site and app label this tab 'Safety & Privacy'.",
                     },
                 ],
             },
@@ -748,22 +791,30 @@ PLATFORMS = [
                     {
                         "name": "Content visibility",
                         "what": "Hides your posts and comments from search engines and from logged-out visitors.",
-                        "how": ["Settings → Safety & Privacy → turn off content visibility"],
+                        "how": ["Settings → Privacy → turn off content visibility"],
                     },
                     {
                         "name": "Allow people to follow you",
                         "what": "Decides whether your posting activity can be followed like a feed.",
-                        "how": ["Settings → Safety & Privacy → Allow people to follow you"],
+                        "how": ["Settings → Privacy → Allow people to follow you"],
                     },
                     {
                         "name": "Active in communities",
                         "what": "Hides which subreddits you're active in from your public profile.",
-                        "how": ["Settings → Safety & Privacy → turn off Show active communities"],
+                        "how": ["Settings → Privacy → turn off Show active communities"],
                     },
                     {
                         "name": "Personalised ads",
                         "what": "Turns off ad targeting based on your browsing and posting.",
                         "how": ["Settings → Privacy → Ad personalisation"],
+                    },
+                    {
+                        "name": "Download your data",
+                        "what": "Requests a copy of your account data, or lets you file a formal deletion request.",
+                        "how": [
+                            "reddit.com/settings/data-request",
+                            "Or|Settings → Privacy → Data request",
+                        ],
                     },
                 ],
             },
@@ -789,8 +840,9 @@ PLATFORMS = [
                         "tag": "Reversible",
                         "what": "YouTube's version of deactivating — your name, videos, likes and subscribers go private.",
                         "how": [
-                            "YouTube Studio → Settings → Channel → Advanced settings → Remove YouTube content → I want to hide my channel"
+                            "YouTube Studio → Settings (left sidebar) → Channel → Advanced settings → Remove YouTube content → I want to hide my content"
                         ],
+                        "note": "You can re-enable the channel later from YouTube Studio.",
                     },
                     {
                         "name": "Delete channel",
@@ -800,7 +852,7 @@ PLATFORMS = [
                             "Same path as Hide → I want to permanently delete my content → tick both boxes",
                             "Or|Google Account → Data & Privacy → Delete a Google service → bin icon next to YouTube",
                         ],
-                        "note": "Your wider Google Account — Gmail, Drive and the rest — is left alone.",
+                        "note": "Your wider Google Account — Gmail, Drive and the rest — is left alone. Download your videos with Google Takeout first.",
                     },
                 ],
             },
@@ -871,7 +923,7 @@ PLATFORMS = [
                         "how": [
                             "Settings & Privacy → Account preferences → Account management → Close account → pick a reason → confirm password"
                         ],
-                        "note": "Short grace period before it's final, then your data is gone.",
+                        "note": "Short grace period before it's final — signing back in during it cancels the request. If a current or former employer put you on a Learning licence or Recruiter seat, LinkedIn can block closing until their admin removes it.",
                     },
                 ],
             },
@@ -903,7 +955,7 @@ PLATFORMS = [
                         "name": "Data for generative AI training",
                         "what": "Stops LinkedIn using your profile and posts to train its AI models.",
                         "how": ["Settings & Privacy → Data privacy → Data for Generative AI Improvement → turn off"],
-                        "note": "This was switched on by default for most accounts when it launched.",
+                        "note": "This was switched on by default for most accounts when it launched. It only affects future use, and it doesn't appear in every region.",
                     },
                     {
                         "name": "Third-party applications",
@@ -933,17 +985,22 @@ PLATFORMS = [
                         "name": "Deactivate account",
                         "tag": "Reversible",
                         "what": "Temporarily disables your account — log back in any time to restore it.",
-                        "how": ["Settings (gear) → Account Info → Account Deactivation and Deletion → Deactivate"],
+                        "how": [
+                            "Settings (gear) → Privacy & content restrictions → Account data, deactivation & deletion → Deactivate",
+                            "Older menus|Settings (gear) → Account Info → Account Deactivation and Deletion → Deactivate",
+                        ],
+                        "note": "Roblox moved these controls under Privacy & content restrictions, so the older Account Info route may be gone from your screen.",
                     },
                     {
                         "name": "Delete account",
                         "tag": "Permanent",
-                        "what": "Roblox doesn't offer instant self-serve deletion to everyone — the reliable route is the support form.",
+                        "what": "Erases your profile, Robux, items and progress.",
                         "how": [
-                            "If shown|Settings → Account Info → Account Deactivation and Deletion → Delete Account",
-                            "Otherwise|Roblox Support contact form → Data Privacy Requests → Right to Be Forgotten",
+                            "Settings (gear) → Privacy & content restrictions → Account data, deactivation & deletion → Delete next to Delete Account → follow the prompts",
+                            "If you can't use that|Roblox Support contact form → Data Privacy Requests → Right to Be Forgotten",
+                            "Older menus|Settings → Account Info → Account Deactivation and Deletion → Delete Account",
                         ],
-                        "note": "Expect an identity check and a short wait. This erases your profile, Robux, items and progress.",
+                        "note": "Needs a verified email, and Roblox checks your identity before it deletes anything. If you used 'Sign in with Roblox' on other sites you may lose access to them. Unlinking a parent account only removes the parent's controls — it doesn't delete the child's account.",
                     },
                 ],
             },
@@ -954,11 +1011,16 @@ PLATFORMS = [
                         "name": "Who can chat, join or friend you",
                         "what": "Separately decides who can message you, join your games or send friend requests.",
                         "how": ["Settings → Privacy"],
+                        "note": "Chat now depends on an age check, which became mandatory in 2026 — accounts that haven't completed one can't use chat.",
                     },
                     {
                         "name": "Parental controls and PIN",
                         "what": "Locks the privacy settings behind a PIN so they can't be loosened without it.",
-                        "how": ["Settings → Parental Controls → Account PIN → turn on"],
+                        "how": [
+                            "Settings → Parental Controls → Account PIN → turn on",
+                            "Linking a child's account|From the child's account: Settings → Parental Controls → Add a parent → accept the request from the parent's email",
+                        ],
+                        "note": "Roblox introduced age-based accounts in 2026 — Kids for under 9s and Select for 9 to 15 — with parental controls running through age 15. Linking a parent account requires the parent to verify their age, and what you see depends on your account's age check and region.",
                     },
                 ],
             },
@@ -1008,8 +1070,8 @@ PLATFORMS = [
                         "name": "Deactivate account",
                         "tag": "Reversible",
                         "what": "Closing your account first hides your profile while your comments stay on the site, anonymised.",
-                        "how": ["Settings → Account Settings → Delete Account"],
-                        "note": "Reversible for 6 months just by logging back in — Wattpad uses one button for both steps.",
+                        "how": ["Profile icon → Settings → Close Account"],
+                        "note": "Wattpad labels this button 'Close Account'. Reversible for 6 months just by logging back in — Wattpad uses one button for both steps.",
                     },
                     {
                         "name": "Delete account",
@@ -1091,7 +1153,7 @@ PLATFORMS = [
                         "how": [
                             "Settings → Data Controls → turn off 'Improve the model for everyone'"
                         ],
-                        "note": "Applies to your whole account, on every device. Business, Enterprise, Edu and API accounts are already excluded by default.",
+                        "note": "Applies to your whole account, on every device, and doesn't delete or hide your saved chats. Business, Enterprise, Edu and API accounts are already excluded by default.",
                     },
                 ],
             },
@@ -1099,16 +1161,26 @@ PLATFORMS = [
                 "title": "Hidden settings",
                 "items": [
                     {
-                        "name": "Temporary chat",
-                        "what": "A one-off chat that never saves to your history, never feeds memory, and is never used for training.",
-                        "how": ["New chat → Temporary chat toggle (top of the chat)"],
-                        "note": "Treat it as 'not saved and not trained on', not as private — OpenAI still holds it for about 30 days for abuse monitoring.",
+                        "name": "Ads controls",
+                        "tag": "New",
+                        "what": "On the Free and Go plans, decides whether ChatGPT uses your past chats, memory and ads history to pick the ads you see.",
+                        "how": ["Settings → Ads controls → turn off Personalize ads"],
+                        "note": "Turning personalisation off does not remove ads — they just rely on your current chat instead. It's a separate switch from the training one above, so you can have either on without the other. You can also view and delete your ads history here. Plus, Pro, Business, Enterprise and Edu plans don't show ads, and ad availability varies by country.",
                     },
                     {
-                        "name": "Memory — two separate switches",
-                        "what": "Saved memories are an editable list of facts about you; reference chat history quietly pulls context from all your past chats.",
-                        "how": ["Settings → Personalisation → Memory → toggle each one independently"],
-                        "note": "Deleting a conversation does not delete the memory it created — you have to clear the memory itself.",
+                        "name": "Temporary chat",
+                        "what": "A chat that never saves to your history, never creates or updates memories, and is never used for training.",
+                        "how": ["New chat → Temporary Chat icon (top right)"],
+                        "note": "Before you start you can choose whether the chat is personalised, meaning it may use your existing memories and custom instructions. Treat it as 'not saved and not trained on', not as private — OpenAI still holds it for about 30 days for abuse monitoring.",
+                    },
+                    {
+                        "name": "Memory",
+                        "what": "Controls whether ChatGPT remembers things about you and draws on your past chats, files and connected apps to personalise replies.",
+                        "how": [
+                            "Settings → Personalization → Memory → turn Enable memory off (some versions show separate switches for saved memories and chat history)",
+                            "To see what it holds|Settings → Personalization → Memory summary → Manage",
+                        ],
+                        "note": "Deleting a conversation does not delete the memory it created — you have to clear the memory itself. Memory and model training are independent switches.",
                     },
                     {
                         "name": "Review your shared links",
@@ -1157,15 +1229,27 @@ PLATFORMS = [
                         "what": "Decides whether your Gemini conversations are saved to your account and used to improve Google's models.",
                         "how": [
                             "myactivity.google.com/product/gemini",
-                            "Or|Gemini app → profile picture → Activity → turn off Keep Activity",
+                            "On the web|gemini.google.com → Settings & help → Activity → Keep Activity → Turn off",
+                            "In the app|Gemini app → menu → profile picture → Gemini Apps Activity → Keep Activity → Turn off",
                         ],
-                        "note": "Google may still hold data for around 72 hours to run the service, even with this off.",
+                        "note": "Formerly called Gemini Apps Activity. While it's on, a sample of your uploads, such as files and photos, can be used to improve Google services. Google may still hold data for around 72 hours to run the service, even with this off.",
                     },
                 ],
             },
             {
                 "title": "Hidden settings",
                 "items": [
+                    {
+                        "name": "Temporary Chat",
+                        "what": "A chat that doesn't appear in your recent chats or Activity and isn't used to train Google's models.",
+                        "how": ["Gemini app → start a new chat → Temporary chat"],
+                        "note": "Temporary chats are kept for 72 hours so you can pick the thread back up, then deleted.",
+                    },
+                    {
+                        "name": "Past chats as personal context",
+                        "what": "Lets Gemini draw on your earlier conversations to personalise its answers.",
+                        "how": ["Gemini app → Settings → Personal context → Your past chats with Gemini"],
+                    },
                     {
                         "name": "Files & data",
                         "what": "Lists every file you've ever attached to a Gemini prompt so you can delete them one by one.",
@@ -1205,8 +1289,8 @@ PLATFORMS = [
                         "name": "Object to AI training",
                         "tag": "Request",
                         "what": "There's no opt-out toggle — you file a formal objection and Meta reviews it case by case.",
-                        "how": ["Facebook → Settings & privacy → Privacy Centre → Generative AI → Right to Object form"],
-                        "note": "These rights are strongest for EU and UK users under GDPR. Elsewhere Meta may refuse.",
+                        "how": ["Facebook → Settings & privacy → Privacy Centre → How Meta uses information for generative AI models and features → Right to object"],
+                        "note": "These rights are strongest for users in the EU, UK and Brazil under data-protection law. Elsewhere Meta may refuse.",
                     },
                 ],
             },
@@ -1215,18 +1299,28 @@ PLATFORMS = [
                 "items": [
                     {
                         "name": "Delete your Meta AI conversations",
-                        "what": "Clears what you've said to Meta AI inside the chat thread.",
-                        "how": ["Open the Meta AI chat → type /reset-ai and send it"],
+                        "what": "Removes Meta's copy of what you've said to Meta AI — deleting the chat from your phone alone does not.",
+                        "how": [
+                            "In WhatsApp|Open the Meta AI chat → type /reset-ai and send it (use /reset-all-ais to clear every Meta AI chat)",
+                            "In the Meta AI app|Menu → Settings → Data and privacy → Manage your information → delete your chats and media",
+                        ],
+                    },
+                    {
+                        "name": "Stop others sharing your chats with Meta AI",
+                        "what": "Stops people in a Messenger chat sharing your messages with Meta AI.",
+                        "how": ["Messenger → open the chat → Information → Privacy and support → Message permissions → turn off Allow message sharing"],
                     },
                     {
                         "name": "Third-party info objection",
                         "what": "A separate objection covering data Meta bought or collected about you from outside sources.",
                         "how": ["Facebook Privacy Centre → search 'Generative AI Data Subject Rights'"],
+                        "note": "Since mid-2026 Meta also uses data other businesses share with it to personalise Meta AI answers. The 'Activity from other businesses' switch (see Facebook) is the control for that.",
                     },
                     {
                         "name": "Mute Meta AI",
                         "what": "Stops Meta AI appearing and notifying you inside the apps, without a full opt-out.",
                         "how": ["Mute the Meta AI chat thread the way you'd mute any contact"],
+                        "note": "There's no setting that removes Meta AI from Facebook, Instagram or WhatsApp. Muting and not starting chats is as close as it gets.",
                     },
                 ],
             },
@@ -1252,6 +1346,7 @@ PLATFORMS = [
                         "tag": "Permanent",
                         "what": "Deletes your account for good — export anything you want to keep first.",
                         "how": ["Settings → Account → Delete account → confirm"],
+                        "note": "If you pay for a plan, cancel the subscription first and wait for the current period to end before deleting.",
                     },
                 ],
             },
@@ -1262,7 +1357,7 @@ PLATFORMS = [
                         "name": "Stop chats training the model",
                         "what": "Keeps your conversations out of model training.",
                         "how": ["Settings → Privacy → turn off 'Help improve Claude'"],
-                        "note": "Work, Enterprise, Education and API accounts are already excluded by default.",
+                        "note": "Only reaches forward — it doesn't undo anything already used. Work, Enterprise, Education and API accounts are already excluded by default.",
                     },
                 ],
             },
@@ -1271,8 +1366,9 @@ PLATFORMS = [
                 "items": [
                     {
                         "name": "Incognito mode",
-                        "what": "Chats that are never used for training and never saved to your history.",
-                        "how": ["New chat → Incognito"],
+                        "what": "Chats that are never used for training and never saved to your history or Claude's memory.",
+                        "how": ["New chat → ghost icon (Incognito)"],
+                        "note": "Incognito chats are still held for a limited time for safety (30 days, longer if flagged) — not saved to your history is not the same as never stored.",
                     },
                     {
                         "name": "Delete one conversation",
@@ -1281,8 +1377,13 @@ PLATFORMS = [
                     },
                     {
                         "name": "Memory and past chat search",
-                        "what": "Controls whether Claude can look back through your earlier conversations for context.",
-                        "how": ["Settings → Capabilities → turn off search and reference chats"],
+                        "what": "Controls whether Claude can look back through your earlier conversations for context, and whether it builds memory from them.",
+                        "how": ["Settings → Capabilities → turn off search and reference chats and generate memory from chat history"],
+                    },
+                    {
+                        "name": "Review your shared links",
+                        "what": "Any chat you've shared has a link that anyone holding it can open until you unshare it.",
+                        "how": ["Settings → Privacy → Manage next to Shared links → Unshare"],
                     },
                 ],
             },
@@ -1307,6 +1408,12 @@ GENERAL_NOTES = [
         "Opting out of AI training only affects what comes next",
         "Turning training off protects future conversations. Anything already absorbed into a "
         "finished training run stays there — none of these companies have an unlearn button.",
+    ),
+    (
+        "Training, ads and personalisation are separate switches",
+        "Turning off AI training doesn't turn off ad personalisation, and the reverse is true too — "
+        "ChatGPT and Meta now keep separate controls for each. Turning personalisation off usually "
+        "still leaves ads on the screen. It only changes what they're based on.",
     ),
     (
         "EU and UK users have stronger rights",
